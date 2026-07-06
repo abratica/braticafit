@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Intake Form — Andrew Bratica</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #ffffff;
+    --bg: #F9F9F8;
+    --ink: #0F0F0E;
+    --ink-2: #4A4A46;
+    --ink-3: #9A9A94;
+    --rule: #E8E8E4;
+    --blue: #2563EB;
+    --blue-hover: #1D4ED8;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 2.5rem;
+    background: var(--white);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-logo {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 3.5rem 2rem 6rem;
+  }
+
+  .page-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .page-header h1 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .page-header p {
+    font-size: 0.9rem;
+    color: var(--ink-3);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .section {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-title {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--blue);
+    margin-bottom: 1.25rem;
+  }
+
+  .question {
+    margin-bottom: 1.5rem;
+  }
+
+  .question:last-child { margin-bottom: 0; }
+
+  .question label.q-label {
+    display: block;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+  }
+
+  .option input[type="checkbox"],
+  .option input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--blue);
+    cursor: pointer;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    -webkit-appearance: auto;
+    appearance: auto;
+  }
+
+  .option span {
+    font-size: 0.87rem;
+    color: var(--ink-2);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 1.25rem 0;
+  }
+
+  textarea.open-field, input.open-field {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.87rem;
+    color: var(--ink);
+    outline: none;
+    resize: vertical;
+    min-height: 90px;
+    transition: border-color 0.15s;
+    -webkit-appearance: none;
+  }
+
+  textarea.open-field::placeholder, input.open-field::placeholder { color: var(--ink-3); }
+  textarea.open-field:focus, input.open-field:focus { border-color: var(--blue); }
+
+  .submit-wrap {
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .submit-btn {
+    background: var(--blue);
+    color: white;
+    border: none;
+    padding: 0.9rem 2.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .submit-btn:hover { background: var(--blue-hover); }
+
+  .submit-note {
+    font-size: 0.75rem;
+    color: var(--ink-3);
+    margin-top: 0.75rem;
+    font-weight: 300;
+  }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 1.25rem 2.5rem;
+    text-align: center;
+    background: var(--white);
+  }
+
+  footer p {
+    font-size: 0.72rem;
+    color: var(--ink-3);
+    font-weight: 300;
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 1rem 1.5rem; }
+    .page { padding: 2.5rem 1.25rem 5rem; }
+    .section { padding: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Andrew Bratica</a>
+</nav>
+
+<form action="https://formspree.io/f/mqevydpg" method="POST">
+<div class="page">
+
+  <div class="page-header">
+    <h1>Let's get to know you.</h1>
+    <p>The more you share, the better I can build something that actually fits your life. Take your time — there are no wrong answers.</p>
+  </div>
+
+  <!-- NAME & EMAIL -->
+  <div class="section">
+    <p class="section-title">Your Info</p>
+
+    <div class="question">
+      <label class="q-label">Your name *</label>
+      <input type="text" class="open-field" name="name" placeholder="First and last name" required style="min-height: auto; padding: 0.75rem 1rem;" />
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">Your email *</label>
+      <input type="email" class="open-field" name="email" placeholder="your@email.com" required style="min-height: auto; padding: 0.75rem 1rem;" />
+    </div>
+  </div>
+
+  <!-- SECTION 1 — FITNESS BACKGROUND -->
+  <div class="section">
+    <p class="section-title">Fitness Background</p>
+
+    <div class="question">
+      <label class="q-label">Your age</label>
+      <input type="text" class="open-field" name="age" placeholder="e.g. 42" inputmode="numeric" style="min-height: auto; padding: 0.75rem 1rem; max-width: 160px;" />
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">How comfortable are you with working out?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="workout_comfort" value="Complete beginner" /><span>Complete beginner — I'm not sure where to start</span></label>
+        <label class="option"><input type="radio" name="workout_comfort" value="Some experience but inconsistent" /><span>Some experience but inconsistent</span></label>
+        <label class="option"><input type="radio" name="workout_comfort" value="Fairly consistent but want more structure" /><span>Fairly consistent but want more structure</span></label>
+        <label class="option"><input type="radio" name="workout_comfort" value="Experienced but feeling stuck" /><span>Experienced but feeling stuck or plateaued</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">Which types of movement do you actually enjoy? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="movement_pref" value="Walking" /><span>Walking</span></label>
+        <label class="option"><input type="checkbox" name="movement_pref" value="Strength training" /><span>Strength training</span></label>
+        <label class="option"><input type="checkbox" name="movement_pref" value="Yoga" /><span>Yoga</span></label>
+        <label class="option"><input type="checkbox" name="movement_pref" value="Pilates" /><span>Pilates</span></label>
+        <label class="option"><input type="checkbox" name="movement_pref" value="Dance" /><span>Dance</span></label>
+        <label class="option"><input type="checkbox" name="movement_pref" value="Cycling" /><span>Cycling</span></label>
+        <label class="option"><input type="checkbox" name="movement_pref" value="Swimming" /><span>Swimming</span></label>
+        <label class="option"><input type="checkbox" name="movement_pref" value="Hiking or being outdoors" /><span>Hiking or being outdoors</span></label>
+        <label class="option"><input type="checkbox" name="movement_pref" value="Group classes" /><span>Group classes</span></label>
+        <label class="option"><input type="checkbox" name="movement_pref" value="I honestly don't know yet" /><span>I honestly don't know yet</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">What's not working with your workouts right now? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="workout_issues" value="Not working out enough" /><span>Not working out enough</span></label>
+        <label class="option"><input type="checkbox" name="workout_issues" value="Don't know what to do" /><span>Don't know what to do</span></label>
+        <label class="option"><input type="checkbox" name="workout_issues" value="Lack of motivation" /><span>Lack of motivation</span></label>
+        <label class="option"><input type="checkbox" name="workout_issues" value="No consistency" /><span>No consistency</span></label>
+        <label class="option"><input type="checkbox" name="workout_issues" value="Getting bored" /><span>Getting bored with the same routine</span></label>
+        <label class="option"><input type="checkbox" name="workout_issues" value="Not seeing results" /><span>Not seeing results</span></label>
+        <label class="option"><input type="checkbox" name="workout_issues" value="Dealing with pain or injury" /><span>Dealing with pain or an injury</span></label>
+        <label class="option"><input type="checkbox" name="workout_issues" value="Other" /><span>Other</span></label>
+        <label class="option"><input type="checkbox" name="workout_issues" value="None of the above" /><span>None of the above</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">How physically demanding is your job?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="job_demand" value="Mostly sitting at a desk" /><span>Mostly sitting at a desk</span></label>
+        <label class="option"><input type="radio" name="job_demand" value="On my feet most of the day" /><span>On my feet most of the day</span></label>
+        <label class="option"><input type="radio" name="job_demand" value="Physically demanding" /><span>Physically demanding</span></label>
+        <label class="option"><input type="radio" name="job_demand" value="Varies" /><span>Varies</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">Do you have any current pain or injuries I should know about? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="injuries" value="Lower back" /><span>Lower back</span></label>
+        <label class="option"><input type="checkbox" name="injuries" value="Knees" /><span>Knees</span></label>
+        <label class="option"><input type="checkbox" name="injuries" value="Shoulders" /><span>Shoulders</span></label>
+        <label class="option"><input type="checkbox" name="injuries" value="Hips" /><span>Hips</span></label>
+        <label class="option"><input type="checkbox" name="injuries" value="Neck" /><span>Neck</span></label>
+        <label class="option"><input type="checkbox" name="injuries" value="Other" /><span>Other</span></label>
+        <label class="option"><input type="checkbox" name="injuries" value="No current pain or injuries" /><span>No current pain or injuries</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">Is there anything medical I should know about &mdash; pregnancy or postpartum, recent surgery, medications, or anything a doctor has flagged about exercise?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="medical_clearance" value="Yes" /><span>Yes</span></label>
+        <label class="option"><input type="radio" name="medical_clearance" value="No" /><span>No</span></label>
+      </div>
+      <input type="text" class="open-field" name="medical_details" placeholder="If yes, feel free to share what's helpful (optional)" style="min-height: auto; padding: 0.75rem 1rem; margin-top: 0.75rem;" />
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">How do you feel in your body right now? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="body_feeling" value="Strong" /><span>Strong</span></label>
+        <label class="option"><input type="checkbox" name="body_feeling" value="Tired" /><span>Tired</span></label>
+        <label class="option"><input type="checkbox" name="body_feeling" value="Stiff" /><span>Stiff</span></label>
+        <label class="option"><input type="checkbox" name="body_feeling" value="Disconnected" /><span>Disconnected</span></label>
+        <label class="option"><input type="checkbox" name="body_feeling" value="Pretty good overall" /><span>Pretty good overall</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 — NUTRITION -->
+  <div class="section">
+    <p class="section-title">Nutrition</p>
+
+    <div class="question">
+      <label class="q-label">What would you like to improve with your nutrition? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="nutrition_improve" value="Not enough healthy food in the house" /><span>Not enough healthy food in the house</span></label>
+        <label class="option"><input type="checkbox" name="nutrition_improve" value="Overeating at night" /><span>Overeating at night</span></label>
+        <label class="option"><input type="checkbox" name="nutrition_improve" value="Undereating earlier in the day" /><span>Undereating earlier in the day</span></label>
+        <label class="option"><input type="checkbox" name="nutrition_improve" value="Understanding macros and calories" /><span>Understanding macros and calories</span></label>
+        <label class="option"><input type="checkbox" name="nutrition_improve" value="Tried diets that haven't worked" /><span>Tried diets that haven't worked</span></label>
+        <label class="option"><input type="checkbox" name="nutrition_improve" value="Emotional eating" /><span>Emotional eating</span></label>
+        <label class="option"><input type="checkbox" name="nutrition_improve" value="Not drinking enough water" /><span>Not drinking enough water</span></label>
+        <label class="option"><input type="checkbox" name="nutrition_improve" value="Don't know where to start" /><span>Don't know where to start</span></label>
+        <label class="option"><input type="checkbox" name="nutrition_improve" value="None of the above" /><span>None of the above</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">Which of these sound like you when it comes to food? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="food_patterns" value="Eat well mostly weekends are the struggle" /><span>I eat well most of the time, weekends are the struggle</span></label>
+        <label class="option"><input type="checkbox" name="food_patterns" value="Know what to do just don't do it" /><span>I know what to do, I just don't do it</span></label>
+        <label class="option"><input type="checkbox" name="food_patterns" value="Food is my go-to when stressed" /><span>Food is my go-to when I'm stressed</span></label>
+        <label class="option"><input type="checkbox" name="food_patterns" value="Swing between strict and screw it" /><span>I swing between being strict and saying screw it</span></label>
+        <label class="option"><input type="checkbox" name="food_patterns" value="It's complicated" /><span>Honestly, it's complicated</span></label>
+        <label class="option"><input type="checkbox" name="food_patterns" value="None of these" /><span>None of these really fit</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">How often do you cook at home?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="cooking_freq" value="Almost never" /><span>Almost never</span></label>
+        <label class="option"><input type="radio" name="cooking_freq" value="A few times a week" /><span>A few times a week</span></label>
+        <label class="option"><input type="radio" name="cooking_freq" value="Most nights" /><span>Most nights</span></label>
+        <label class="option"><input type="radio" name="cooking_freq" value="Every day" /><span>Every day</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">How much water do you drink daily?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="water_intake" value="Barely any" /><span>Barely any</span></label>
+        <label class="option"><input type="radio" name="water_intake" value="Some but not enough" /><span>Some but not enough</span></label>
+        <label class="option"><input type="radio" name="water_intake" value="Pretty well hydrated" /><span>Pretty well hydrated</span></label>
+        <label class="option"><input type="radio" name="water_intake" value="Very well hydrated" /><span>Very well hydrated</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">Do you meal prep or plan your meals in advance?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="meal_prep" value="Never" /><span>Never</span></label>
+        <label class="option"><input type="radio" name="meal_prep" value="Sometimes" /><span>Sometimes</span></label>
+        <label class="option"><input type="radio" name="meal_prep" value="Most weeks" /><span>Most weeks</span></label>
+        <label class="option"><input type="radio" name="meal_prep" value="Consistently" /><span>Consistently</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">Do you have any dietary restrictions, allergies, or specific eating preferences I should know about?</label>
+      <textarea class="open-field" name="dietary_restrictions" placeholder="e.g. vegetarian, dairy-free, gluten-free, food allergies..."></textarea>
+    </div>
+  </div>
+
+  <!-- SECTION 3 — SLEEP -->
+  <div class="section">
+    <p class="section-title">Sleep</p>
+
+    <div class="question">
+      <label class="q-label">How would you describe your sleep? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="sleep" value="Go to bed too late" /><span>I go to bed too late</span></label>
+        <label class="option"><input type="checkbox" name="sleep" value="Wake up before I want to" /><span>I wake up before I want to</span></label>
+        <label class="option"><input type="checkbox" name="sleep" value="Wake up in the middle of the night" /><span>I wake up in the middle of the night</span></label>
+        <label class="option"><input type="checkbox" name="sleep" value="Don't feel rested after a full night" /><span>I don't feel rested even after a full night</span></label>
+        <label class="option"><input type="checkbox" name="sleep" value="Sleep is generally good" /><span>My sleep is generally good</span></label>
+        <label class="option"><input type="checkbox" name="sleep" value="None of the above" /><span>None of the above</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 — STRESS & ENERGY -->
+  <div class="section">
+    <p class="section-title">Stress & Energy</p>
+
+    <div class="question">
+      <label class="q-label">How would you describe your current stress level?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="stress_level" value="Low" /><span>Low — life feels manageable</span></label>
+        <label class="option"><input type="radio" name="stress_level" value="Moderate" /><span>Moderate — some stress but handling it</span></label>
+        <label class="option"><input type="radio" name="stress_level" value="High" /><span>High — feeling overwhelmed regularly</span></label>
+        <label class="option"><input type="radio" name="stress_level" value="Very high" /><span>Very high — struggling significantly</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">What's contributing to your stress? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="stress_causes" value="Work" /><span>Work</span></label>
+        <label class="option"><input type="checkbox" name="stress_causes" value="Family responsibilities" /><span>Family responsibilities</span></label>
+        <label class="option"><input type="checkbox" name="stress_causes" value="Health concerns" /><span>Health concerns</span></label>
+        <label class="option"><input type="checkbox" name="stress_causes" value="Relationship stress" /><span>Relationship stress</span></label>
+        <label class="option"><input type="checkbox" name="stress_causes" value="Lack of time" /><span>Lack of time</span></label>
+        <label class="option"><input type="checkbox" name="stress_causes" value="Other" /><span>Other</span></label>
+        <label class="option"><input type="checkbox" name="stress_causes" value="None of the above" /><span>None of the above</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">How does stress typically affect your health habits? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="stress_effects" value="Stop working out" /><span>I stop working out</span></label>
+        <label class="option"><input type="checkbox" name="stress_effects" value="My eating falls apart" /><span>My eating falls apart</span></label>
+        <label class="option"><input type="checkbox" name="stress_effects" value="Stop sleeping well" /><span>I stop sleeping well</span></label>
+        <label class="option"><input type="checkbox" name="stress_effects" value="Isolate" /><span>I isolate</span></label>
+        <label class="option"><input type="checkbox" name="stress_effects" value="Push through fine" /><span>I push through fine</span></label>
+        <label class="option"><input type="checkbox" name="stress_effects" value="All of the above" /><span>All of the above</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">How do you currently manage stress? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="stress_management" value="Exercise" /><span>Exercise</span></label>
+        <label class="option"><input type="checkbox" name="stress_management" value="Talking to someone" /><span>Talking to someone</span></label>
+        <label class="option"><input type="checkbox" name="stress_management" value="No good outlet" /><span>Nothing — I don't have a good outlet</span></label>
+        <label class="option"><input type="checkbox" name="stress_management" value="Food" /><span>Food</span></label>
+            <label class="option"><input type="checkbox" name="stress_management" value="A drink" /><span>A drink</span></label>
+            <label class="option"><input type="checkbox" name="stress_management" value="Marijuana" /><span>Marijuana</span></label>
+        <label class="option"><input type="checkbox" name="stress_management" value="Just push through" /><span>I just push through it</span></label>
+        <label class="option"><input type="checkbox" name="stress_management" value="Other" /><span>Other</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">How would you describe your energy throughout the day?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="energy_level" value="Strong morning crashes afternoon" /><span>Strong in the morning, crashes in the afternoon</span></label>
+        <label class="option"><input type="radio" name="energy_level" value="Low all day" /><span>Low all day</span></label>
+        <label class="option"><input type="radio" name="energy_level" value="Inconsistent" /><span>Inconsistent — depends on the day</span></label>
+        <label class="option"><input type="radio" name="energy_level" value="Generally good" /><span>Generally good</span></label>
+        <label class="option"><input type="radio" name="energy_level" value="Exhausted most of the time" /><span>Exhausted most of the time</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">What do you think is most affecting your energy? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="energy_causes" value="Poor sleep" /><span>Poor sleep</span></label>
+        <label class="option"><input type="checkbox" name="energy_causes" value="Poor nutrition" /><span>Poor nutrition</span></label>
+        <label class="option"><input type="checkbox" name="energy_causes" value="Too much stress" /><span>Too much stress</span></label>
+        <label class="option"><input type="checkbox" name="energy_causes" value="Not enough movement" /><span>Not enough movement</span></label>
+        <label class="option"><input type="checkbox" name="energy_causes" value="Too much caffeine" /><span>Too much caffeine</span></label>
+        <label class="option"><input type="checkbox" name="energy_causes" value="Not sure" /><span>I'm not sure</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">How would you describe your mental clarity day to day?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="mental_clarity" value="Clear and focused most of the time" /><span>Clear and focused most of the time</span></label>
+        <label class="option"><input type="radio" name="mental_clarity" value="Foggy or scattered regularly" /><span>Foggy or scattered regularly</span></label>
+        <label class="option"><input type="radio" name="mental_clarity" value="Depends on sleep and stress" /><span>Depends heavily on sleep and stress</span></label>
+        <label class="option"><input type="radio" name="mental_clarity" value="Struggle to focus and stay present" /><span>I struggle to focus and stay present</span></label>
+        <label class="option"><input type="radio" name="mental_clarity" value="Varies a lot" /><span>Varies a lot day to day</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">How much caffeine do you consume daily?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="caffeine" value="None" /><span>None</span></label>
+        <label class="option"><input type="radio" name="caffeine" value="1 cup" /><span>1 cup of coffee or tea</span></label>
+        <label class="option"><input type="radio" name="caffeine" value="2-3 cups" /><span>2–3 cups</span></label>
+        <label class="option"><input type="radio" name="caffeine" value="4+ cups" /><span>4+ cups</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">How often do you drink alcohol?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="alcohol" value="Never" /><span>Never</span></label>
+        <label class="option"><input type="radio" name="alcohol" value="Occasionally" /><span>Occasionally — a few times a month</span></label>
+        <label class="option"><input type="radio" name="alcohol" value="Socially most weekends" /><span>Socially — most weekends</span></label>
+        <label class="option"><input type="radio" name="alcohol" value="Regularly most days" /><span>Regularly — most days</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 — HABITS & ROUTINE -->
+  <div class="section">
+    <p class="section-title">Habits & Routine</p>
+
+    <div class="question">
+      <label class="q-label">When it comes to your health right now, how in control do you feel?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="health_control" value="Pretty in control just need direction" /><span>Pretty in control &mdash; I just need direction</span></label>
+        <label class="option"><input type="radio" name="health_control" value="Some control but life keeps taking over" /><span>Some control, but life keeps taking over</span></label>
+        <label class="option"><input type="radio" name="health_control" value="Very little health is running me" /><span>Very little &mdash; my health is running me, not the other way around</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">Do you tend to be all-or-nothing with health habits?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="all_or_nothing" value="Yes all in or completely off" /><span>Yes — I'm either all in or completely off</span></label>
+        <label class="option"><input type="radio" name="all_or_nothing" value="Sometimes depends on area" /><span>Sometimes — depends on the area</span></label>
+        <label class="option"><input type="radio" name="all_or_nothing" value="Not really pretty balanced" /><span>Not really — I'm pretty balanced</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">How do you respond to setbacks?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="setbacks" value="Bounce back quickly" /><span>I bounce back quickly</span></label>
+        <label class="option"><input type="radio" name="setbacks" value="Frustrated but get back on track" /><span>I get frustrated but eventually get back on track</span></label>
+        <label class="option"><input type="radio" name="setbacks" value="Tend to spiral" /><span>I tend to spiral and lose momentum</span></label>
+        <label class="option"><input type="radio" name="setbacks" value="Depends on situation" /><span>It depends on the situation</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">Do you compare yourself to others when it comes to health and fitness?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="comparison" value="Often affects motivation" /><span>Often — it affects my motivation</span></label>
+        <label class="option"><input type="radio" name="comparison" value="Sometimes try not to" /><span>Sometimes but I try not to</span></label>
+        <label class="option"><input type="radio" name="comparison" value="Rarely" /><span>Rarely</span></label>
+        <label class="option"><input type="radio" name="comparison" value="Not at all" /><span>Not at all</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 — GOALS -->
+  <div class="section">
+    <p class="section-title">Goals</p>
+
+    <div class="question">
+      <label class="q-label">What is your primary goal? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="goals" value="Lose weight" /><span>Lose weight</span></label>
+        <label class="option"><input type="checkbox" name="goals" value="Build strength" /><span>Build strength</span></label>
+        <label class="option"><input type="checkbox" name="goals" value="Improve energy levels" /><span>Improve energy levels</span></label>
+        <label class="option"><input type="checkbox" name="goals" value="Build healthy habits" /><span>Build healthy habits</span></label>
+        <label class="option"><input type="checkbox" name="goals" value="Improve overall health" /><span>Improve overall health</span></label>
+        <label class="option"><input type="checkbox" name="goals" value="Feel more confident" /><span>Feel more confident</span></label>
+        <label class="option"><input type="checkbox" name="goals" value="Reduce stress through movement" /><span>Reduce stress through movement</span></label>
+        <label class="option"><input type="checkbox" name="goals" value="Train for a specific event" /><span>Train for a specific event</span></label>
+        <label class="option"><input type="checkbox" name="goals" value="Other" /><span>Other</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">Who's in your corner with this? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="support_corner" value="Partner" /><span>Partner</span></label>
+        <label class="option"><input type="checkbox" name="support_corner" value="A friend or two" /><span>A friend or two</span></label>
+        <label class="option"><input type="checkbox" name="support_corner" value="Family" /><span>Family</span></label>
+        <label class="option"><input type="checkbox" name="support_corner" value="Coworkers" /><span>Coworkers</span></label>
+        <label class="option"><input type="checkbox" name="support_corner" value="Mostly a me thing right now" /><span>Right now, this is mostly a me thing</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">How soon are you looking to see results?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="timeline" value="Within 4 weeks" /><span>Within 4 weeks</span></label>
+        <label class="option"><input type="radio" name="timeline" value="Within 3 months" /><span>Within 3 months</span></label>
+        <label class="option"><input type="radio" name="timeline" value="Within 6 months" /><span>Within 6 months</span></label>
+        <label class="option"><input type="radio" name="timeline" value="Playing the long game" /><span>I'm playing the long game — no rush</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">How confident are you that you can reach your goals?</label>
+      <div class="options">
+        <label class="option"><input type="radio" name="confidence" value="Not very confident" /><span>Not very — I've tried before and it hasn't worked</span></label>
+        <label class="option"><input type="radio" name="confidence" value="Somewhat confident" /><span>Somewhat — I need the right support</span></label>
+        <label class="option"><input type="radio" name="confidence" value="Fairly confident" /><span>Fairly — with the right plan I can do it</span></label>
+        <label class="option"><input type="radio" name="confidence" value="Very confident" /><span>Very — I just need structure and accountability</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">What does success look like to you in 3 months? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="success_vision" value="Feeling stronger" /><span>Feeling stronger</span></label>
+        <label class="option"><input type="checkbox" name="success_vision" value="Having more energy" /><span>Having more energy</span></label>
+        <label class="option"><input type="checkbox" name="success_vision" value="Clothes fitting better" /><span>Clothes fitting better</span></label>
+        <label class="option"><input type="checkbox" name="success_vision" value="A routine I actually stick to" /><span>A routine I actually stick to</span></label>
+        <label class="option"><input type="checkbox" name="success_vision" value="Feeling more confident in my body" /><span>Feeling more confident in my body</span></label>
+        <label class="option"><input type="checkbox" name="success_vision" value="Sleeping better" /><span>Sleeping better</span></label>
+        <label class="option"><input type="checkbox" name="success_vision" value="Feeling less stressed" /><span>Feeling less stressed</span></label>
+        <label class="option"><input type="checkbox" name="success_vision" value="Seeing the scale move" /><span>Seeing the scale move</span></label>
+        <label class="option"><input type="checkbox" name="success_vision" value="Other" /><span>Other</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 — WHAT YOU'VE TRIED -->
+  <div class="section">
+    <p class="section-title">What You've Tried Before</p>
+
+    <div class="question">
+      <label class="q-label">What have you tried in the past? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="past_attempts" value="Gym membership" /><span>Gym membership</span></label>
+        <label class="option"><input type="checkbox" name="past_attempts" value="Personal training" /><span>Personal training</span></label>
+        <label class="option"><input type="checkbox" name="past_attempts" value="Group fitness classes" /><span>Group fitness classes</span></label>
+        <label class="option"><input type="checkbox" name="past_attempts" value="Online coaching or programs" /><span>Online coaching or programs</span></label>
+        <label class="option"><input type="checkbox" name="past_attempts" value="Diets or meal plans" /><span>Diets or meal plans</span></label>
+        <label class="option"><input type="checkbox" name="past_attempts" value="Fitness apps" /><span>Fitness apps</span></label>
+        <label class="option"><input type="checkbox" name="past_attempts" value="Nothing yet" /><span>Nothing yet — this is my first time</span></label>
+        <label class="option"><input type="checkbox" name="past_attempts" value="Other" /><span>Other</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">Why do you think previous attempts haven't stuck? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="why_failed" value="Didn't enjoy it" /><span>Didn't enjoy it</span></label>
+        <label class="option"><input type="checkbox" name="why_failed" value="Too expensive" /><span>Too expensive to maintain</span></label>
+        <label class="option"><input type="checkbox" name="why_failed" value="Too time consuming" /><span>Too time consuming</span></label>
+        <label class="option"><input type="checkbox" name="why_failed" value="Life got in the way" /><span>Life got in the way</span></label>
+        <label class="option"><input type="checkbox" name="why_failed" value="Didn't see results fast enough" /><span>Didn't see results fast enough</span></label>
+        <label class="option"><input type="checkbox" name="why_failed" value="Wasn't built for my life" /><span>Felt like it wasn't built for my life</span></label>
+        <label class="option"><input type="checkbox" name="why_failed" value="Lacked accountability" /><span>Lacked accountability</span></label>
+        <label class="option"><input type="checkbox" name="why_failed" value="Lacked support" /><span>Lacked support</span></label>
+        <label class="option"><input type="checkbox" name="why_failed" value="Other" /><span>Other</span></label>
+        <label class="option"><input type="checkbox" name="why_failed" value="None of the above" /><span>None of the above</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8 — MOTIVATION -->
+  <div class="section">
+    <p class="section-title">Motivation</p>
+
+    <div class="question">
+      <label class="q-label">What made you reach out now as opposed to before? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="why_now" value="Hit a breaking point" /><span>I finally hit a breaking point</span></label>
+        <label class="option"><input type="checkbox" name="why_now" value="Someone I trust recommended it" /><span>Someone I trust recommended it</span></label>
+        <label class="option"><input type="checkbox" name="why_now" value="Been thinking about it for a while" /><span>I've been thinking about it for a while</span></label>
+        <label class="option"><input type="checkbox" name="why_now" value="Something recently changed" /><span>Something in my life recently changed</span></label>
+        <label class="option"><input type="checkbox" name="why_now" value="Just feel ready" /><span>I just feel ready</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">What's motivated you in the past, even briefly? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="past_motivation" value="Seeing physical results" /><span>Seeing physical results</span></label>
+        <label class="option"><input type="checkbox" name="past_motivation" value="Feeling stronger" /><span>Feeling stronger</span></label>
+        <label class="option"><input type="checkbox" name="past_motivation" value="Having more energy" /><span>Having more energy</span></label>
+        <label class="option"><input type="checkbox" name="past_motivation" value="Specific event or deadline" /><span>A specific event or deadline</span></label>
+        <label class="option"><input type="checkbox" name="past_motivation" value="Accountability from someone else" /><span>Accountability from someone else</span></label>
+        <label class="option"><input type="checkbox" name="past_motivation" value="Enjoying the workout" /><span>Enjoying the actual workout</span></label>
+        <label class="option"><input type="checkbox" name="past_motivation" value="Other" /><span>Other</span></label>
+        <label class="option"><input type="checkbox" name="past_motivation" value="Nothing has really motivated me yet" /><span>Nothing has really motivated me yet</span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 9 — WHAT'S ALREADY WORKING -->
+  <div class="section">
+    <p class="section-title">What's Already Working</p>
+
+    <div class="question">
+      <label class="q-label">What are you already doing well when it comes to your health? (select all that apply)</label>
+      <div class="options">
+        <label class="option"><input type="checkbox" name="strengths" value="Exercise regularly" /><span>I exercise regularly</span></label>
+        <label class="option"><input type="checkbox" name="strengths" value="Eat pretty well" /><span>I eat pretty well</span></label>
+        <label class="option"><input type="checkbox" name="strengths" value="Sleep well" /><span>I sleep well</span></label>
+        <label class="option"><input type="checkbox" name="strengths" value="Stay hydrated" /><span>I stay hydrated</span></label>
+        <label class="option"><input type="checkbox" name="strengths" value="Manage stress well" /><span>I manage stress well</span></label>
+        <label class="option"><input type="checkbox" name="strengths" value="Have a consistent routine" /><span>I have a consistent routine</span></label>
+        <label class="option"><input type="checkbox" name="strengths" value="Not much yet" /><span>Not much yet — that's why I'm here</span></label>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">Is there anything else you'd like me to know before we get started?</label>
+      <textarea class="open-field" name="anything_else" placeholder="Anything at all — the more context the better"></textarea>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="question">
+      <label class="q-label">Is there anything you're nervous or hesitant about?</label>
+      <textarea class="open-field" name="hesitations" placeholder="No wrong answers here"></textarea>
+    </div>
+  </div>
+
+  <div class="submit-wrap">
+    <button class="submit-btn" type="submit">Submit</button>
+    <p class="submit-note">I'll review this before our first call so we can hit the ground running.</p>
+  </div>
+
+</div>
+</form>
+
+<footer>
+  <p>Andrew Bratica · Health & Performance Coaching · Boston, MA</p>
+</footer>
+
+</body>
+</html>
