@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Andrew Bratica</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --white: #ffffff;
+    --bg: #F9F9F8;
+    --ink: #0F0F0E;
+    --ink-2: #4A4A46;
+    --ink-3: #9A9A94;
+    --rule: #E8E8E4;
+    --blue: #2563EB;
+    --blue-hover: #1D4ED8;
+  }
+
+  html, body { height: 100%; }
+
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 2.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+  }
+
+  .nav-logo-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+    color: var(--ink-2);
+    text-decoration: none;
+    font-weight: 400;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-cta {
+    background: var(--blue) !important;
+    color: white !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 500 !important;
+    transition: background 0.15s;
+  }
+
+  .nav-cta:hover { background: var(--blue-hover) !important; }
+
+  .contact-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+  }
+
+  .contact-panel {
+    width: 100%;
+    max-width: 460px;
+  }
+
+  .contact-panel h1 {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+
+  .contact-panel h1 em {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .contact-intro {
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .form-card {
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+
+  .f-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  input, textarea {
+    width: 100%;
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 0.7rem 0.9rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.85rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s;
+    -webkit-appearance: none;
+  }
+
+  input::placeholder, textarea::placeholder { color: var(--ink-3); }
+  input:focus, textarea:focus { border-color: var(--blue); }
+
+  textarea {
+    min-height: 130px;
+    resize: vertical;
+    margin-bottom: 0.6rem;
+  }
+
+  .submit-btn {
+    width: 100%;
+    background: var(--blue);
+    color: white;
+    border: none;
+    padding: 0.85rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .submit-btn:hover { background: var(--blue-hover); }
+
+  .form-footnote {
+    font-size: 0.7rem;
+    color: var(--ink-3);
+    text-align: center;
+    margin-top: 0.85rem;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 1.25rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 0.72rem;
+    color: var(--ink-3);
+    font-weight: 300;
+  }
+
+  @media (max-width: 760px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.1rem; }
+    .f-row { grid-template-columns: 1fr; }
+    footer { padding: 1.25rem 1.5rem; flex-direction: column; gap: 0.25rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <span class="nav-logo-text">Andrew Bratica</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="how-it-works.html">How It Works</a></li>
+    <li><a href="about.html" class="nav-cta">About Me</a></li>
+  </ul>
+</nav>
+
+<div class="contact-wrap">
+  <div class="contact-panel">
+    <h1>Have a question?</h1>
+    <p class="contact-intro">Ask me anything and I'll get back to you as soon as I can.</p>
+
+    <div class="form-card">
+      <form action="https://formspree.io/f/xaqgdyzb" method="POST">
+        <input type="hidden" name="form_type" value="question" />
+        <div class="f-row">
+          <input type="text" name="name" placeholder="Your name *" required />
+          <input type="email" name="email" placeholder="Email address *" required />
+        </div>
+        <textarea name="message" placeholder="How can I help?" required></textarea>
+        <button class="submit-btn" type="submit">Send</button>
+      </form>
+      <p class="form-footnote">Your info stays with me — no lists, no spam.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Andrew Bratica · Online Health &amp; Performance Coaching</p>
+  <p>Boston, MA · © 2026</p>
+</footer>
+
+</body>
+</html>
