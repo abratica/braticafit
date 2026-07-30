@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<!-- NOTE: remove this noindex tag at full public launch -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How It Works — Andrew Bratica</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #ffffff;
+    --bg: #F9F9F8;
+    --ink: #0F0F0E;
+    --ink-2: #4A4A46;
+    --ink-3: #9A9A94;
+    --rule: #E8E8E4;
+    --blue: #2563EB;
+    --blue-hover: #1D4ED8;
+  }
+
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 2.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .nav-logo {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+    color: var(--ink-2);
+    text-decoration: none;
+    font-weight: 400;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-cta {
+    background: var(--blue) !important;
+    color: white !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 500 !important;
+    transition: background 0.15s;
+  }
+
+  .nav-cta:hover { background: var(--blue-hover) !important; }
+
+  .page {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 4rem 2rem 5rem;
+  }
+
+  h1 {
+    font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-sub {
+    font-size: 1rem;
+    color: var(--ink-2);
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  .philosophy {
+    margin-bottom: 3rem;
+  }
+
+  .philosophy p {
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 1.15rem;
+  }
+
+  .philosophy p:last-child { margin-bottom: 0; }
+
+  .philosophy strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* STEPS */
+  .framework-intro {
+    margin-bottom: 2.75rem;
+  }
+
+  .framework-intro p {
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 1.1rem;
+  }
+
+  .framework-intro p:last-child { margin-bottom: 0; }
+
+  .framework-intro .lead {
+    font-size: 1.05rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .c-section {
+    margin-bottom: 2.75rem;
+  }
+
+  .c-section h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.9rem;
+    letter-spacing: -0.01em;
+  }
+
+  .c-section p {
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 1.1rem;
+  }
+
+  .c-transition {
+    font-weight: 500 !important;
+    color: var(--ink) !important;
+    margin-bottom: 0.9rem !important;
+  }
+
+  .c-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .c-bullets li {
+    position: relative;
+    padding-left: 1.6rem;
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 0.95rem;
+  }
+
+  .c-bullets li:last-child { margin-bottom: 0; }
+
+  .c-bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0.15rem;
+    top: 0.62em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--blue);
+  }
+
+  .c-bullets li strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .c-standalone {
+    font-size: 0.98rem !important;
+    color: var(--ink) !important;
+    font-weight: 500 !important;
+    margin: 1.4rem 0 0 0 !important;
+  }
+
+  .sample-link {
+    margin-top: 1.1rem;
+  }
+  .sample-link a {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--blue);
+    text-decoration: none;
+  }
+  .sample-link a:hover { text-decoration: underline; }
+
+  .framework-bow {
+    font-size: 0.98rem;
+    color: var(--ink);
+    font-weight: 400;
+    line-height: 1.75;
+    padding: 1.4rem 0 0 0;
+    border-top: 1px solid var(--rule);
+    margin-bottom: 2.75rem;
+  }
+
+  .plan-img-wrap {
+    margin-top: 1.4rem;
+  }
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 3.5rem;
+  }
+
+  .step {
+    display: flex;
+    gap: 1.25rem;
+    padding-bottom: 2rem;
+    position: relative;
+  }
+
+  .step:last-child { padding-bottom: 0; }
+
+  .step-num-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .step-line {
+    width: 1px;
+    flex-grow: 1;
+    background: var(--rule);
+    margin-top: 0.5rem;
+  }
+
+  .step:last-child .step-line { display: none; }
+
+  .step-content {
+    padding-top: 0.3rem;
+  }
+
+  .step-content h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+  }
+
+  .step-content p {
+    font-size: 0.92rem;
+    color: var(--ink-2);
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  .step-plan-img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    display: block;
+    margin-top: 1.25rem;
+  }
+
+  /* WEEK TO WEEK */
+  .section-heading {
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-sub {
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    font-weight: 300;
+    line-height: 1.75;
+    margin-bottom: 1.75rem;
+  }
+
+  .week-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .week-item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .week-check {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .week-check svg {
+    width: 15px;
+    height: 15px;
+    stroke: var(--blue);
+    stroke-width: 2.5;
+    fill: none;
+  }
+
+  .week-item-text strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.15rem;
+  }
+
+  .week-item-text span {
+    font-size: 0.88rem;
+    color: var(--ink-2);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  /* CLOSING */
+  .closing {
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .closing p {
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    font-weight: 300;
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+
+  .closing p strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .cta-btn {
+    background: var(--blue);
+    color: white;
+    padding: 0.8rem 1.9rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.15s;
+  }
+
+  .cta-btn:hover { background: var(--blue-hover); }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 1.25rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 0.72rem;
+    color: var(--ink-3);
+    font-weight: 300;
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 1rem 1.5rem; }
+    .page { padding: 3rem 1.5rem 4rem; }
+    .closing { padding: 1.5rem 1.25rem; }
+    footer { padding: 1.25rem 1.5rem; flex-direction: column; gap: 0.25rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Andrew Bratica</span>
+  <ul class="nav-links">
+    <li><a href="/about">About Me</a></li>
+    <li><a href="/" class="nav-cta">Home</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+
+  <h1>How it works</h1>
+
+  <div class="framework-intro">
+    <p class="lead">Every client I've ever coached has been different.</p>
+    <p>Different starting point, different schedule, different goals, different strengths and weaknesses. But fifteen years in, I've learned the things that have made my clients succeed are surprisingly consistent. My approach is built on that: the same proven fundamentals, fitted to a completely different life every time.</p>
+    <p>That's why I developed my own framework, the 3 C's: Clarity, Curation, and Calibration.</p>
+  </div>
+
+  <div class="c-section">
+    <h2>Clarity</h2>
+    <p>It starts with clarity. Without it, all the effort in the world doesn't matter, because it's pointed in the wrong direction. You can push your way to short-term results. But if the plan was never the right fit for you, it's only a matter of time before it falls apart.</p>
+    <p>And clarity does something people don't expect: it lightens the load. When you know exactly what matters, you can finally stop trying to figure it all out.</p>
+    <p class="c-transition">Here's how I'll help you find it:</p>
+    <ul class="c-bullets">
+      <li><strong>You'll fill out a questionnaire</strong> so I can get to know you: your goals, your sleep, your stress, how you eat, what's worked and what hasn't.</li>
+      <li><strong>We'll get on a 30-minute call</strong> and figure out the one or two things that actually matter right now.</li>
+      <li><strong>You'll walk away with a written Clarity Plan:</strong> what I see going on, what I'd focus on first, exactly where I'd start. Yours to keep, whether we work together or not.</li>
+    </ul>
+    <p class="sample-link"><a href="/clarity-plan-sample">See a sample Clarity Plan →</a></p>
+  </div>
+
+  <div class="c-section">
+    <h2>Curation</h2>
+    <p>Curation may be my favorite part, because it's about finding what works specifically for you. Being healthy is a lifelong process, and it's something we should all enjoy.</p>
+    <p>There are so many ways to exercise, from lifting weights to taking an evening walk, doing a yoga class, or dancing in your living room. Curation is about eliminating everything that doesn't fit you.</p>
+    <p>We've all had ways of moving that brought us joy. Let's reconnect with them.</p>
+    <p class="c-transition">Here's how I'll handle it:</p>
+    <ul class="c-bullets">
+      <li><strong>Every week, your workouts show up planned.</strong></li>
+      <li><strong>Built from what you actually enjoy.</strong> The goal is a plan that fits your week and makes it better.</li>
+      <li><strong>Every single thing comes with its why.</strong> It's a plan, not a playlist.</li>
+    </ul>
+    <p class="sample-link"><a href="/sample-week">See what a week can look like →</a></p>
+  </div>
+
+  <div class="c-section">
+    <h2>Calibration</h2>
+    <p>Life changes; we change, so the plan changes. Between our weekly calls and daily texting, I'll always know how things are actually going, and I'll adjust as we go.</p>
+    <p class="c-transition">Here's how it works:</p>
+    <ul class="c-bullets">
+      <li><strong>When you're ready, the plan moves forward.</strong> New movements, bigger challenges, whatever the next step looks like for you. My job isn't just to remove friction; it's to push you when the time is right.</li>
+      <li><strong>When life happens, the plan adjusts.</strong> Traveling for work, I'll send hotel workouts. Busy work week, I'll send mini workouts and we'll focus on recovery.</li>
+      <li><strong>And we'll keep exploring.</strong> As I learn what you love, I'll bring you new things to try: a new style, a new challenge, a new way to move.</li>
+    </ul>
+  </div>
+
+  <p class="framework-bow">That's the framework: clarity on what matters, workouts you actually enjoy, and a plan that moves with your life. Let's keep it simple.</p>
+
+  <div class="closing">
+    <p>The first call is free, and it's genuinely useful <strong>whether or not we work together.</strong> Worst case, you walk away with more clarity than you came with.</p>
+    <a class="cta-btn" href="index.html#form">Take the first step</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>Andrew Bratica · Online Health &amp; Fitness Coaching for Women</p>
+  <p>Boston, MA · © 2026</p>
+</footer>
+
+</body>
+</html>
