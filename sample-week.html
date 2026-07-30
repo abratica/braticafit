@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<!-- NOTE: remove this noindex tag at full public launch -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample Week — BraticaFit</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  @view-transition { navigation: auto; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --white: #ffffff;
+    --bg: #F9F9F8;
+    --ink: #0F0F0E;
+    --ink-2: #4A4A46;
+    --ink-3: #9A9A94;
+    --rule: #E8E8E4;
+    /* solid workout-type colors */
+    --strength: #7C5E93;   /* plum */
+    --calm: #4A7FB5;       /* yoga + mobility blue */
+    --outside: #5E8C57;    /* green */
+    --med: #B08A4F;
+    --pilates: #B56A7E;        /* meditation gold */
+    --rest: #A8A8A2;       /* gray */
+  }
+  body {
+    background: var(--bg);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: var(--ink);
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  .week-card {
+    width: 100%;
+    max-width: 480px;
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 1.6rem 1.5rem 1.4rem;
+  }
+  .week-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.75rem;
+  }
+  .week-sub {
+    font-size: 0.8rem;
+    color: var(--ink-3);
+    font-weight: 300;
+    margin-bottom: 1.2rem;
+  }
+  .coach-note {
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 1.1rem 1.2rem;
+    margin-bottom: 1.4rem;
+    position: relative;
+  }
+  .coach-note::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1rem;
+    bottom: 1rem;
+    width: 3px;
+    border-radius: 2px;
+    background: #2563EB;
+  }
+  .note-label {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--ink-3);
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+  .coach-note p:not(.note-label) {
+    font-size: 0.84rem;
+    color: var(--ink-2);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .fmt-key {
+    margin-top: 1.1rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.7rem;
+    color: var(--ink-3);
+    font-weight: 300;
+  }
+  .day-block {
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .day-block:last-of-type { border-bottom: none; }
+  .day-name {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--ink-3);
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+  .items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.82rem;
+  }
+  .fmt {
+    flex: 0 0 1.3rem;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    border-radius: 8px;
+    padding: 0.34rem 0.75rem;
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.8rem;
+  }
+  .pill small { font-weight: 300; font-size: 0.72rem; opacity: 0.85; }
+  .p-strength { background: var(--strength); }
+  .p-calm     { background: var(--calm); }
+  .p-outside  { background: var(--outside); }
+  .p-med      { background: var(--med); }
+  .p-pilates  { background: var(--pilates); }
+  .p-rest     { background: var(--rest); color: var(--ink-2); }
+  @media (prefers-reduced-motion: no-preference) {
+    .week-card {
+      animation: card-in 0.5s ease-out both;
+    }
+    @keyframes card-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="week-card">
+  <p class="week-title">Sarah's week</p>
+  <div class="coach-note">
+    <p class="note-label">This week's focus</p>
+    <p>Sarah, you've been feeling more tightness in your upper back, and sleep has been rough lately. So this week we'll start each day with quick mobility work, wind down each night with a guided meditation, and keep you strong and moving with a few short workouts and walks in between.</p>
+  </div>
+
+  <div class="day-block">
+    <p class="day-name">Monday</p>
+    <div class="items">
+      <div class="item"><span class="fmt">🎥</span><span class="pill p-calm">Wake-up mobility <small>10 min</small></span></div>
+      <div class="item"><span class="fmt">🌳</span><span class="pill p-outside">Walk <small>20 min</small></span></div>
+      <div class="item"><span class="fmt">🎧</span><span class="pill p-med">Wind-down meditation <small>10 min · night</small></span></div>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <p class="day-name">Tuesday</p>
+    <div class="items">
+      <div class="item"><span class="fmt">🎥</span><span class="pill p-pilates">Floor Pilates <small>15 min</small></span></div>
+      <div class="item"><span class="fmt">🎥</span><span class="pill p-calm">Upper-back yoga flow <small>22 min</small></span></div>
+      <div class="item"><span class="fmt">🎧</span><span class="pill p-med">Wind-down meditation <small>10 min · night</small></span></div>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <p class="day-name">Wednesday</p>
+    <div class="items">
+      <div class="item"><span class="fmt">🎥</span><span class="pill p-calm">Wake-up mobility <small>10 min</small></span></div>
+      <div class="item"><span class="fmt">🎥</span><span class="pill p-strength">Full-body dumbbell strength <small>20 min</small></span></div>
+      <div class="item"><span class="fmt">🎧</span><span class="pill p-med">Wind-down meditation <small>10 min · night</small></span></div>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <p class="day-name">Thursday</p>
+    <div class="items">
+      <div class="item"><span class="fmt">🎥</span><span class="pill p-pilates">Floor Pilates <small>15 min</small></span></div>
+      <div class="item"><span class="fmt">🎥</span><span class="pill p-calm">Yoga flow <small>20 min</small></span></div>
+      <div class="item"><span class="fmt">🎧</span><span class="pill p-med">Wind-down meditation <small>10 min · night</small></span></div>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <p class="day-name">Friday</p>
+    <div class="items">
+      <div class="item"><span class="fmt">🎥</span><span class="pill p-calm">Wake-up mobility <small>10 min</small></span></div>
+      <div class="item"><span class="fmt">🎥</span><span class="pill p-strength">Dumbbell strength &amp; core <small>20 min</small></span></div>
+      <div class="item"><span class="fmt">🎧</span><span class="pill p-med">Wind-down meditation <small>10 min · night</small></span></div>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <p class="day-name">Saturday</p>
+    <div class="items">
+      <div class="item"><span class="fmt">🌳</span><span class="pill p-outside">Long walk <small>1 hour</small></span></div>
+      <div class="item"><span class="fmt">🎧</span><span class="pill p-med">Wind-down meditation <small>10 min · night</small></span></div>
+    </div>
+  </div>
+
+  <div class="day-block">
+    <p class="day-name">Sunday</p>
+    <div class="items">
+      <div class="item"><span class="fmt">😌</span><span class="pill p-rest">Rest <small>you earned it</small></span></div>
+      <div class="item"><span class="fmt">🎧</span><span class="pill p-med">Wind-down meditation <small>10 min · night</small></span></div>
+    </div>
+  </div>
+
+
+  <p class="fmt-key">🎥 video &nbsp;·&nbsp; 🎧 audio &nbsp;·&nbsp; 🌳 outside</p>
+  <p style="margin-top:0.85rem; font-size:0.7rem; color:#9A9A94; font-weight:300;">BraticaFit · braticafit.com · sample week</p>
+</div>
+
+</body>
+</html>
